@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
-import 'package:validador_sigue/src/domain/assets_file_service.dart';
+import 'package:validador_sigue/src/infraestructure/common/copiar_archivos.dart';
 
 class GdalAplicacion {
 
@@ -44,10 +44,11 @@ class GdalAplicacion {
     Directory documentsDir = await getApplicationDocumentsDirectory();
     String documentsPath = documentsDir.path;
     String programFilesDestinationPath = p.join(documentsPath, '.gdal_sigue');
-    await AssetFileService().copyAssetFiles(
-      filenames: gdalFiles,
-      assetsSubfolder: assetsSubfolder,
-      destinationDir: programFilesDestinationPath,
+    CopiarAssetsArchivos copiarAssetsArchivos = CopiarAssetsArchivos();
+    await copiarAssetsArchivos.copiarArchivosAssets(
+      nombresArchivos: gdalFiles,
+      assetsFolder: assetsSubfolder,
+      folderDestino: programFilesDestinationPath,
     );
     await Future.delayed(Duration(seconds: 2));
   }

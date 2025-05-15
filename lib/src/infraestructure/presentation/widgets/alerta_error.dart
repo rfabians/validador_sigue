@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:cherry_toast/cherry_toast.dart';
 
 
-void errorMessage(BuildContext context, String title, String message) {
+void errorMensaje(BuildContext context, String title, String message) {
   CherryToast.error(
     disableToastAnimation: true,
     displayCloseButton: false,

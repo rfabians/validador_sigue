@@ -1,5 +1,4 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:validador_sigue/src/infraestructure/dependencias/ejecutable_gdal.dart';
 import 'package:validador_sigue/src/infraestructure/presentation/pages/pagina_inicio.dart';
 
 
