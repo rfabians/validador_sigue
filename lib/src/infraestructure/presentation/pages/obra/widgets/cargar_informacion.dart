@@ -2,14 +2,13 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:get/get.dart';
 import 'package:validador_sigue/src/infraestructure/common/seleccionar_archivos.dart';
 import 'package:validador_sigue/src/infraestructure/data_sources/file_gdb/generar_lista_capas_gdal.dart';
-import 'package:validador_sigue/src/infraestructure/presentation/pages/controladores/controlador_pagina_home.dart';
 import 'package:validador_sigue/src/infraestructure/presentation/pages/obra/controlador/controlador.dart';
 import 'package:validador_sigue/src/infraestructure/presentation/widgets/alerta_error.dart';
 
 Widget cargarInformacion(BuildContext context) {
   return GetBuilder(
-    init: ControladorPaginaHome(),
-    builder: (controladorPaginaHome) {
+    init: ControladorObraPagina(),
+    builder: (controladorObraPagina) {
       return Column(
         children: [
           const SizedBox(height: 20),
@@ -29,12 +28,12 @@ Widget cargarInformacion(BuildContext context) {
                   String? rutaGDB = await seleccionarCarpeta(context);
                   if (rutaGDB != null) {
                     if (rutaGDB.endsWith('.gdb')) {
-                      controladorPaginaHome.actualizarEstadoCarga(true);
+                      controladorObraPagina.actualizarEstadoCargaPagina(true);
                       List<String>? listadoCapas = await generarListadoCapasGdal(rutaGDB);
                       if(listadoCapas != null){
                         print(listadoCapas);
                       }
-                      controladorPaginaHome.actualizarEstadoCarga(false);
+                      controladorObraPagina.actualizarEstadoCargaPagina(false);
                     } else {
                       errorMensaje(
                         context,
@@ -64,7 +63,6 @@ Widget cargarInformacion(BuildContext context) {
                     }
                   }
                   if (rutasShapesFiles.isNotEmpty) {
-                    print(rutasShapesFiles);
                   } else {
                     errorMensaje(
                       context,

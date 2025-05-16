@@ -23,15 +23,34 @@ class _PanelValidacionObraState extends State<PanelValidacionObra> {
                     ? Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [ProgressRing(),const SizedBox(height: 5) ,Text('Cargando Gdal')],
+                        children: [
+                          ProgressRing(),
+                          const SizedBox(height: 5),
+                          Text('Cargando Gdal'),
+                        ],
                       ),
                     )
                     : GetBuilder(
-                  init: ControladorObraPagina(),
-                  builder: (controladorPaginaHome) {
-                    return cargarInformacion(context);
-                  },
-                ),
+                      init: ControladorObraPagina(),
+                      builder: (controladorPaginaHome) {
+                        return Container(
+                          child:
+                              controladorPaginaHome.obtenerEstadoCarga()
+                                  ? Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        ProgressRing(),
+                                        const SizedBox(height: 5),
+                                        Text('Leyendo Capas'),
+                                      ],
+                                    ),
+                                  )
+                                  : cargarInformacion(context),
+                        );
+                      },
+                    ),
           ),
     );
   }
