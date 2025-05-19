@@ -1,23 +1,25 @@
 import 'package:get/get.dart';
+import 'package:validador_sigue/src/domain/ports/repositories/repositorio_entidad_sigue.dart';
 
-/// Controlador para la página de Obra.
-/// Gestiona el estado de carga de la página y notifica a los listeners cuando cambia.
 class ControladorObraPagina extends GetxController {
-  /// Indica si la página está en estado de carga.
   bool _estaCargando = false;
+  List<RepositorioEntidadSIGUE> _listaEntidadesSIGUE = [];
 
-  /// Actualiza el estado de carga de la página.
-  ///
-  /// [loadingPane] - Nuevo estado de carga (true si está cargando, false en caso contrario).
   void actualizarEstadoCargaPagina(bool loadingPane) {
     _estaCargando = loadingPane;
     update();
   }
 
-  /// Obtiene el estado actual de carga de la página.
-  ///
-  /// Retorna `true` si está cargando, `false` en caso contrario.
+  void actualizarListaEntidadesSIGUE(List<RepositorioEntidadSIGUE> lista) {
+    _listaEntidadesSIGUE = lista;
+    update();
+  }
+
   bool obtenerEstadoCarga() {
     return _estaCargando;
+  }
+
+  List<RepositorioEntidadSIGUE> obtenerListaEntidadesSIGUE() {
+    return _listaEntidadesSIGUE;
   }
 }

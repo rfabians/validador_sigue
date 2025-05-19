@@ -8,6 +8,7 @@ enum TipoEntidadSIGUE {
   lineaAcueducto,
   lineaAlcantarillado,
   areaAlcantarillado,
+  noAplica,
 }
 
 abstract class EntidadSIGUE {
