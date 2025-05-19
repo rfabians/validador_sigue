@@ -1,11 +1,16 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:get/get.dart';
+import 'package:validador_sigue/src/domain/entitites/entidad_sigue.dart';
+import 'package:validador_sigue/src/domain/ports/repositories/repositorio_entidad_sigue.dart';
 import 'package:validador_sigue/src/infraestructure/common/seleccionar_archivos.dart';
 import 'package:validador_sigue/src/infraestructure/data_sources/file_gdb/generar_lista_capas_gdal.dart';
 import 'package:validador_sigue/src/infraestructure/presentation/pages/obra/controlador/controlador.dart';
+import 'package:validador_sigue/src/infraestructure/presentation/pages/pagina_inicio.dart';
 import 'package:validador_sigue/src/infraestructure/presentation/widgets/alerta_error.dart';
+import 'package:validador_sigue/src/infraestructure/presentation/widgets/asignacion_capa_entidad.dart';
 
 Widget cargarInformacion(BuildContext context) {
+  List<RepositorioEntidadSIGUE> listaEntidadesSIGUE = [];
   return GetBuilder(
     init: ControladorObraPagina(),
     builder: (controladorObraPagina) {
@@ -29,9 +34,27 @@ Widget cargarInformacion(BuildContext context) {
                   if (rutaGDB != null) {
                     if (rutaGDB.endsWith('.gdb')) {
                       controladorObraPagina.actualizarEstadoCargaPagina(true);
-                      List<String>? listadoCapas = await generarListadoCapasGdal(rutaGDB);
-                      if(listadoCapas != null){
-                        print(listadoCapas);
+                      List<String>? listadoCapas =
+                          await generarListadoCapasGdal(rutaGDB);
+                      if (listadoCapas != null) {
+                        for (String capa in listadoCapas) {
+                          RepositorioEntidadSIGUE entidadSIGUE =
+                              RepositorioEntidadSIGUE(
+                                rutaGDB,
+                                capa,
+                                TipoArchivo.gdb,
+                                TipoEntidadSIGUE.noAplica,
+                                TipoInformacion.obra,
+                              );
+                          listaEntidadesSIGUE.add(entidadSIGUE);
+                        }
+                        asignarListaCapas(
+                          context,
+                          'Asignar capas a entidades SIGUE',
+                          'Seleccione las capas que desea validar',
+                          listaEntidadesSIGUE,
+                          const PaginaInicio(),
+                        );
                       }
                       controladorObraPagina.actualizarEstadoCargaPagina(false);
                     } else {
