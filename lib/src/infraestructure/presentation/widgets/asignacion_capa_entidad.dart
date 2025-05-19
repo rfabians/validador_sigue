@@ -24,7 +24,9 @@ void asignarListaCapas(
                 children: [
                   Text(description),
                   const SizedBox(height: 20),
-                  asignacionCapaEntidad(context, listaEntidadesSIGUE),
+                  AsignacionCapaEntidad(
+                    listaEntidadesSIGUE: listaEntidadesSIGUE,
+                  ),
                 ],
               ),
             ),
@@ -33,10 +35,13 @@ void asignarListaCapas(
             FilledButton(
               child: const Text('Validar'),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  FluentPageRoute(builder: (context) => page),
-                );
+                for (RepositorioEntidadSIGUE capa in listaEntidadesSIGUE) {
+                  print(
+                    RepositorioEntidadSIGUE.nombreComunCapa(
+                      capa.tipoEntidadSIGUE,
+                    ),
+                  );
+                }
               },
             ),
             Button(
@@ -50,63 +55,82 @@ void asignarListaCapas(
   );
 }
 
-Widget asignacionCapaEntidad(
-  BuildContext context,
-  List<RepositorioEntidadSIGUE> listaEntidadesSIGUE,
-) {
-  List<Row> listaEntidades = [];
-  List<String> entidadesSIGUE =
-      RepositorioEntidadSIGUE.obtenerListaEntidadesSIGUE();
+class AsignacionCapaEntidad extends StatefulWidget {
+  List<RepositorioEntidadSIGUE> listaEntidadesSIGUE = [];
+  AsignacionCapaEntidad({super.key, required this.listaEntidadesSIGUE});
 
-  for (RepositorioEntidadSIGUE entidad in listaEntidadesSIGUE) {
-    listaEntidades.add(
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(width: 290, height: 35, child: Text(entidad.nombreCapa)),
-          SizedBox(
-            height: 35,
-            width: 290,
-            child: ComboBox<String>(
-              items:
-                  entidadesSIGUE
-                      .map(
-                        (entidadSIGUE) => ComboBoxItem<String>(
-                          value: RepositorioEntidadSIGUE.nombreComunCapa(
-                            entidad.tipoEntidadSIGUE,
+  @override
+  State<AsignacionCapaEntidad> createState() => _AsignacionCapaEntidadState();
+}
+
+class _AsignacionCapaEntidadState extends State<AsignacionCapaEntidad> {
+  @override
+  Widget build(BuildContext context) {
+    List<Row> listaEntidades = [];
+    List<String> entidadesSIGUE =
+        RepositorioEntidadSIGUE.obtenerListaEntidadesSIGUE();
+
+    for (RepositorioEntidadSIGUE entidad in widget.listaEntidadesSIGUE) {
+      listaEntidades.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(width: 290, height: 35, child: Text(entidad.nombreCapa)),
+            SizedBox(
+              height: 35,
+              width: 290,
+              child: ComboBox<String>(
+                items:
+                    entidadesSIGUE
+                        .map(
+                          (entidadSIGUE) => ComboBoxItem<String>(
+                            value: RepositorioEntidadSIGUE.nombreComunCapa(
+                              RepositorioEntidadSIGUE.obtenerEntidadSIGUE(
+                                entidadSIGUE,
+                              ),
+                            ),
+                            child: Text(entidadSIGUE),
                           ),
-                          child: Text(entidadSIGUE),
-                        ),
-                      )
-                      .toList(),
-              onChanged: (value) {
-                entidad.tipoEntidadSIGUE =
-                    RepositorioEntidadSIGUE.obtenerEntidadSIGUE(value!);
-
-                print(
-                  'Entidad seleccionada: ${entidad.tipoEntidadSIGUE.toString()}',
-                );
-              },
-              placeholder: Text('Seleccione una entidad'),
+                        )
+                        .toList(),
+                onChanged: (String? valorSeleccionado) {
+                  setState(() {
+                    entidad.tipoEntidadSIGUE =
+                        RepositorioEntidadSIGUE.obtenerEntidadSIGUE(
+                          valorSeleccionado!,
+                        );
+                    print(
+                      RepositorioEntidadSIGUE.nombreComunCapa(
+                        entidad.tipoEntidadSIGUE,
+                      ),
+                    );
+                  });
+                },
+                placeholder: Text(
+                  RepositorioEntidadSIGUE.nombreComunCapa(
+                    entidad.tipoEntidadSIGUE,
+                  ),
+                ),
+              ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  return Builder(
-    builder: (context) {
-      return SizedBox(
-        height: MediaQuery.of(context).size.height * 0.5,
-        width: MediaQuery.of(context).size.width * 0.8,
-        child: ListView.builder(
-          itemCount: listaEntidades.length,
-          itemBuilder: (context, index) {
-            return listaEntidades[index];
-          },
+          ],
         ),
       );
-    },
-  );
+    }
+
+    return Builder(
+      builder: (context) {
+        return SizedBox(
+          height: MediaQuery.of(context).size.height * 0.5,
+          width: MediaQuery.of(context).size.width * 0.8,
+          child: ListView.builder(
+            itemCount: listaEntidades.length,
+            itemBuilder: (context, index) {
+              return listaEntidades[index];
+            },
+          ),
+        );
+      },
+    );
+  }
 }

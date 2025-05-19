@@ -1,21 +1,19 @@
 import 'package:get/get.dart';
-import 'package:validador_sigue/src/domain/entitites/entidad_geografica.dart';
-import 'package:validador_sigue/src/domain/entitites/entidad_sigue.dart';
 
 class ControladorAsignacionCapas extends GetxController {
-  List<EntidadGeografica> _listaCapas = [];
-  List<EntidadSIGUE> _listaEntidadesSIGUE = [];
+  bool _estaCargando = false;
+  String _mensajeCarga = '';
 
-  List<EntidadGeografica> get listaCapas => _listaCapas;
-  List<EntidadSIGUE> get listaEntidadesSIGUE => _listaEntidadesSIGUE;
-
-  set listaCapas(List<EntidadGeografica> capas) {
-    _listaCapas = capas;
+  void actualizarEstadoCargaPagina(bool loadingPane) {
+    _estaCargando = loadingPane;
     update();
   }
 
-  set listaEntidadesSIGUE(List<EntidadSIGUE> entidades) {
-    _listaEntidadesSIGUE = entidades;
+  void actualizarMensajeCarga(String mensaje) {
+    _mensajeCarga = mensaje;
     update();
   }
+
+  get estaCargando => _estaCargando;
+  get mensajeCarga => _mensajeCarga;
 }
