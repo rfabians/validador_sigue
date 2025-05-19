@@ -15,6 +15,7 @@ Future<String?> seleccionarCarpeta(BuildContext context) async {
       'No se ha seleccionado un directorio valido',
     );
   }
+  return null;
 }
 
 Future<List<String?>> seleccionarArchivosPorExtension(

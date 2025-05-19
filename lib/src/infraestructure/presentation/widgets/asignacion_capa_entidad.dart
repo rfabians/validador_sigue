@@ -1,5 +1,9 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:get/get.dart';
+import 'package:validador_sigue/src/application/use_cases/cargar_informacion.dart';
+import 'package:validador_sigue/src/application/use_cases/crear_proyecto.dart';
 import 'package:validador_sigue/src/domain/ports/repositories/repositorio_entidad_sigue.dart';
+import 'package:validador_sigue/src/infraestructure/presentation/controllers/controlador_asignacion_capas.dart';
 
 void asignarListaCapas(
   BuildContext context,
@@ -8,53 +12,89 @@ void asignarListaCapas(
   List<RepositorioEntidadSIGUE> listaEntidadesSIGUE,
   StatefulWidget page,
 ) async {
+  final controladorAsignacionCapas = Get.put(ControladorAsignacionCapas());
   final _ = await showDialog<String>(
     context: context,
     builder:
-        (context) => ContentDialog(
-          constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(context).size.height * 0.8,
-            maxWidth: 700,
-          ),
-          title: Center(child: Text(title, style: TextStyle(fontSize: 18))),
-          content: SingleChildScrollView(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(description),
-                  const SizedBox(height: 20),
-                  AsignacionCapaEntidad(
-                    listaEntidadesSIGUE: listaEntidadesSIGUE,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          actions: [
-            FilledButton(
-              child: const Text('Validar'),
-              onPressed: () {
-                for (RepositorioEntidadSIGUE capa in listaEntidadesSIGUE) {
-                  print(
-                    RepositorioEntidadSIGUE.nombreComunCapa(
-                      capa.tipoEntidadSIGUE,
-                    ),
-                  );
-                }
-              },
-            ),
-            Button(
-              child: const Text('Cancelar'),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
+        (context) => GetBuilder<ControladorAsignacionCapas>(
+          builder:
+              (_) =>
+                  controladorAsignacionCapas.estaCargando
+                      ? ContentDialog(
+                        constraints: BoxConstraints(
+                          maxHeight: MediaQuery.of(context).size.height * 0.8,
+                          maxWidth: 700,
+                        ),
+                        title: Center(
+                          child: Text(title, style: TextStyle(fontSize: 18)),
+                        ),
+                        content: SingleChildScrollView(
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(controladorAsignacionCapas.mensajeCarga),
+                                const SizedBox(height: 20),
+                                ProgressRing(),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                      : ContentDialog(
+                        constraints: BoxConstraints(
+                          maxHeight: MediaQuery.of(context).size.height * 0.8,
+                          maxWidth: 700,
+                        ),
+                        title: Center(
+                          child: Text(title, style: TextStyle(fontSize: 18)),
+                        ),
+                        content: SingleChildScrollView(
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(description),
+                                const SizedBox(height: 20),
+                                AsignacionCapaEntidad(
+                                  listaEntidadesSIGUE: listaEntidadesSIGUE,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        actions: [
+                          FilledButton(
+                            child: const Text('Validar'),
+                            onPressed: () async {
+                              controladorAsignacionCapas
+                                  .actualizarEstadoCargaPagina(true);
+                              controladorAsignacionCapas.actualizarMensajeCarga(
+                                'Importando Información',
+                              );
+                              String idProyecto = await crearProyecto(context);
+                              await cargarInformacion(
+                                idProyecto,
+                                listaEntidadesSIGUE,
+                                context,
+                              );
+                              controladorAsignacionCapas
+                                  .actualizarEstadoCargaPagina(false);
+                            },
+                          ),
+                          Button(
+                            child: const Text('Cancelar'),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
+                      ),
         ),
   );
 }
 
+// ignore: must_be_immutable
 class AsignacionCapaEntidad extends StatefulWidget {
   List<RepositorioEntidadSIGUE> listaEntidadesSIGUE = [];
   AsignacionCapaEntidad({super.key, required this.listaEntidadesSIGUE});

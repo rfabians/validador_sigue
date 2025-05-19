@@ -5,7 +5,7 @@ import 'package:validador_sigue/src/domain/ports/repositories/repositorio_entida
 import 'package:validador_sigue/src/infraestructure/common/seleccionar_archivos.dart';
 import 'package:validador_sigue/src/infraestructure/data_sources/file_gdb/generar_lista_capas_gdal.dart';
 import 'package:validador_sigue/src/infraestructure/presentation/pages/obra/controlador/controlador.dart';
-import 'package:validador_sigue/src/infraestructure/presentation/pages/pagina_inicio.dart';
+import 'package:validador_sigue/src/infraestructure/presentation/pages/obra/panel_validacion_obra.dart';
 import 'package:validador_sigue/src/infraestructure/presentation/widgets/alerta_error.dart';
 import 'package:validador_sigue/src/infraestructure/presentation/widgets/asignacion_capa_entidad.dart';
 
@@ -53,7 +53,7 @@ Widget cargarInformacion(BuildContext context) {
                           'Asignar capas a entidades SIGUE',
                           'Seleccione las capas que desea validar',
                           listaEntidadesSIGUE,
-                          const PaginaInicio(),
+                          PanelValidacionObra(),
                         );
                       }
                       controladorObraPagina.actualizarEstadoCargaPagina(false);
@@ -78,14 +78,29 @@ Widget cargarInformacion(BuildContext context) {
                 ),
                 onPressed: () async {
                   List<String?> rutasShapes =
-                      await seleccionarArchivosPorExtension(context, '.shp');
-                  List<String> rutasShapesFiles = [];
+                      await seleccionarArchivosPorExtension(context, 'shp');
+                  List<RepositorioEntidadSIGUE> rutasShapesFiles = [];
                   for (String? ruta in rutasShapes) {
                     if (ruta != null) {
-                      rutasShapesFiles.add(ruta);
+                      rutasShapesFiles.add(
+                        RepositorioEntidadSIGUE(
+                          ruta,
+                          ruta.split('\\').last,
+                          TipoArchivo.shp,
+                          TipoEntidadSIGUE.noAplica,
+                          TipoInformacion.obra,
+                        ),
+                      );
                     }
                   }
                   if (rutasShapesFiles.isNotEmpty) {
+                    asignarListaCapas(
+                      context,
+                      'Asignar capas a entidades SIGUE',
+                      'Seleccione las capas que desea validar',
+                      rutasShapesFiles,
+                      PanelValidacionObra(),
+                    );
                   } else {
                     errorMensaje(
                       context,
