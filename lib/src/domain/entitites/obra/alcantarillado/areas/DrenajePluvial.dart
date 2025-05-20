@@ -17,7 +17,7 @@ class Drenajepluvial extends ModeloValidacion {
         "CLASE",
         "IDENTIFIC",
         "FECHADATO",
-        "CONTRATO_I",
+        "CONTRATO_ID",
         "W",
         "PENDIENTE",
         "IMPERMEABI",

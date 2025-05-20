@@ -1,23 +1,15 @@
-import 'package:validador_sigue/src/domain/entitites/entidad_sigue.dart';
+class ErrorValidacion {
+  String mensaje;
+  String campo;
+  String valor;
+  String claseSIGUE;
+  int idObject;
 
-enum TipoError {
-  errorDominio,
-  campoNulo,
-  estructuraDatos,
-  sistemaCoordenadas,
-  espacial,
-}
-
-abstract class ErrorValidacion {
-  EntidadSIGUE entidadSIGUE;
-  TipoError tipoError;
-  String descripcion;
-  String IDElemento;
-
-  ErrorValidacion(
-    this.entidadSIGUE,
-    this.tipoError,
-    this.descripcion,
-    this.IDElemento,
-  );
+  ErrorValidacion({
+    required this.mensaje,
+    required this.campo,
+    required this.valor,
+    required this.claseSIGUE,
+    required this.idObject,
+  });
 }

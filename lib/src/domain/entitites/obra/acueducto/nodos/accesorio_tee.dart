@@ -1,7 +1,7 @@
 import 'package:validador_sigue/src/domain/entitites/modelo_validacion.dart';
 
-class InstrumentosDeMedicion extends ModeloValidacion {
-  InstrumentosDeMedicion({
+class AccesorioTee extends ModeloValidacion {
+  AccesorioTee({
     required super.entidadSigue,
     required super.dominiosCampos,
     required super.camposNoNulos,
@@ -9,61 +9,61 @@ class InstrumentosDeMedicion extends ModeloValidacion {
     required super.camposNulos,
   });
 
-  static InstrumentosDeMedicion parametrosValidaciones() {
-    return InstrumentosDeMedicion(
-      entidadSigue: 'Nodo Acueducto Instrumentos de Medición',
+  static AccesorioTee parametrosValidaciones() {
+    return AccesorioTee(
+      entidadSigue: 'Nodo Acueducto Accesorio Tee',
       dominiosCampos: {
-        'SUBTIPO': 'Dom_Subtip_InsMedicion',
+        'SUBTIPO': 'Dom_Subtip_AccesTee',
         'ESTADOENRED': 'Dom_EstadoRed',
         'CALIDADDATO': 'Dom_CalidadDato',
+        'MATERIAL': 'Dom_Material_Acue',
         'DIAMETRO1': 'Dom_DiamNom_Acue',
+        'DIAMETRO2': 'Dom_DiamNom_Acue',
+        'CLASEACCES': 'Dom_ClaseAccTee',
       },
       camposNoNulos: [
         "IDENTIFIC",
         "NORTE",
         "ESTE",
         "FECHAINST",
-        "LOCALIZACI",
+        "LOCALIZACIONRELATIVA",
+        "ROTACION",
         "C_RASANTE",
-        "CONTRATO_I",
-        "MARCA",
-        "CAUDAL_PRO",
+        "PROFUN",
+        "CONTRATO_ID",
         "NDISENO",
       ],
       camposNulos: [
-        "ROTACION",
-        "PROFUN",
-        "MATERIAL",
         "TIPOESPPUB",
         "MATESPPUBL",
         "AUTOMATIZA",
-        "DIAMETRO2",
-        "SENTIDOOPE",
-        "ESTADOOPER",
+        "SENTIDOOPERAC",
+        "ESTADOOPERAC",
         "TIPOOPERAC",
-        "ESTADOFIS_",
+        "ESTADOFIS_VAL",
         "TIPOVALVUL",
         "VUELTASCIE",
-        "CLASEACCES",
-        "ESTADOFISI",
+        "ESTADOFISICOH",
+        "MARCA",
         "FUNCIONPIL",
         "ESTADOMED",
         "SECTORENTR",
         "SECTORSALI",
-        "IDTUBERIAM",
+        "IDTUBERIAMEDIDA",
+        "CAUDAL_PROMEDIO",
         "TIPO_M",
-        "FECHA_TOMA",
+        "FECHA_TOMA_C",
         "UBICACCAJI",
         "CENTRO",
         "L_ALM",
         "AREARESP",
-        "TIPO_MUEST",
+        "TIPO_MUESTR",
         "FUENTEABAS",
-        "UBICAC_MUE",
+        "UBICAC_MUES",
         "PTOANALISI",
         "LOCPUNTO",
         "ESTADO",
-        "FECHAESTAD",
+        "FECHAESTADO",
         "CLASEPUNTO",
         "NROFILTROS",
         "NROSEDIMEN",
@@ -88,8 +88,12 @@ class InstrumentosDeMedicion extends ModeloValidacion {
         "NOMBRE",
         "DIRECCION",
         "PRESION",
+        "FECHA_TOMA_C",
       ],
-      validacionesPersonalizadas: [],
+      validacionesPersonalizadas: [
+        "DIAMETRO1 <> DIAMETRO2 AND CLASEACCES = '1'",
+        "DIAMETRO1 = DIAMETRO2 AND CLASEACCES = '2'",
+      ],
     );
   }
 }

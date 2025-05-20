@@ -21,7 +21,7 @@ class Conduccion extends ModeloValidacion {
         'T_SECCION': 'Dom_TipoSeccion_Acue',
       },
       camposNoNulos: [
-        "CONTRATO_I",
+        "CONTRATO_ID",
         "AREA_TR_M2",
         "C_CLAVEI",
         "C_CLAVEF",
@@ -30,11 +30,11 @@ class Conduccion extends ModeloValidacion {
         "NDISENO",
       ],
       camposNulos: [
-        "ESTADOLEGA",
+        "ESTADOLEGAL",
         "COSTADO",
-        "PROFUNDIDA",
+        "PROFUNDIDAD",
         "RUGOSIDAD",
-        "CODACTIVO_",
+        "CONTRATO_ID",
       ],
       validacionesPersonalizadas: [],
     );

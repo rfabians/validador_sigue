@@ -2,6 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:get/get.dart';
 import 'package:validador_sigue/src/application/use_cases/cargar_informacion.dart';
 import 'package:validador_sigue/src/application/use_cases/crear_proyecto.dart';
+import 'package:validador_sigue/src/application/use_cases/validar_integridad_atributiva.dart';
 import 'package:validador_sigue/src/domain/ports/repositories/repositorio_entidad_sigue.dart';
 import 'package:validador_sigue/src/infraestructure/presentation/controllers/controlador_asignacion_capas.dart';
 
@@ -78,6 +79,7 @@ void asignarListaCapas(
                                 listaEntidadesSIGUE,
                                 context,
                               );
+                              await validarIntegridadAtributiva(context, idProyecto, listaEntidadesSIGUE);
                               controladorAsignacionCapas
                                   .actualizarEstadoCargaPagina(false);
                             },

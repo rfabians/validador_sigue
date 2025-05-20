@@ -21,7 +21,7 @@ class RedMenor extends ModeloValidacion {
         'TIPOINSTALACION': 'Dom_TipoInst',
         'COSTADO': 'Dom_Costado',
       },
-      camposNoNulos: ["CONTRATO_I", "PROFUNDIDA", "RUGOSIDAD"],
+      camposNoNulos: ["CONTRATO_ID", "PROFUNDIDAD", "RUGOSIDAD"],
       camposNulos: [
         "NOMBRE",
         "T_SECCION",

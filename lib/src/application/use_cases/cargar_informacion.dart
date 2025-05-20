@@ -14,8 +14,8 @@ Future<void> cargarInformacion(
 ) async {
   final documentosPath = await getApplicationDocumentsDirectory();
   final rutaProyecto = '${documentosPath.path}/SigueProyecto/$idProyecto';
-  final databaseDestinoPath = '${rutaProyecto}/Database.db';
-  final sqlMacrosCreateDestinoPath = '${rutaProyecto}/SqlMacrosCreate.sql';
+  final databaseDestinoPath = '$rutaProyecto/Database.db';
+  final sqlMacrosCreateDestinoPath = '$rutaProyecto/SqlMacrosCreate.sql';
   final database = await duckdb.open(databaseDestinoPath);
   final connectionDatabase = await duckdb.connect(database);
   List<String> sqlCreacionMacros = File(
@@ -134,6 +134,7 @@ Future<void> cargarInformacion(
         await connectionDatabase.execute(sql);
       } catch (e) {
         errorMensaje(
+          // ignore: use_build_context_synchronously
           context,
           'Error en importación',
           'La capa ${capa.nombreCapa} no cumple con la estructura de la Norma',

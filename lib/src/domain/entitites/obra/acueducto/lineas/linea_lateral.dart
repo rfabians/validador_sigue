@@ -1,7 +1,7 @@
 import 'package:validador_sigue/src/domain/entitites/modelo_validacion.dart';
 
-class RedMatriz extends ModeloValidacion {
-  RedMatriz({
+class LineaLateral extends ModeloValidacion {
+  LineaLateral({
     required super.entidadSigue,
     required super.dominiosCampos,
     required super.camposNoNulos,
@@ -9,20 +9,23 @@ class RedMatriz extends ModeloValidacion {
     required super.camposNulos,
   });
 
-  static RedMatriz parametrosValidaciones() {
-    return RedMatriz(
-      entidadSigue: 'Acueducto Líneas Red Matriz',
+  static LineaLateral parametrosValidaciones() {
+    return LineaLateral(
+      entidadSigue: 'Acueducto Líneas Línea Lateral',
       dominiosCampos: {
-        'SUBTIPO': 'Dom_Subtip_RedMatriz',
+        'SUBTIPO': 'Dom_Subtip_LinLateral_Acue',
         'ESTADOENRED': 'Dom_EstadoRed',
+        'MATERIAL': 'Dom_DiamNom_Acue',
         'CALIDADDEDATO': 'Dom_CalidadDato',
+        'ESTADOLEGAL': 'Dom_EstadoLegal',
         'TIPOINSTALACION': 'Dom_TipoInst',
-        'COSTADO': 'Dom_Costado',
       },
-      camposNoNulos: ["CONTRATO_I", "PROFUNDIDA", "RUGOSIDAD"],
+      camposNoNulos: ["CONTRATO_ID", "PROFUNDIDAD", "RUGOSIDAD"],
       camposNulos: [
-        "ESTADOLEGA",
+        "NOMBRE",
+        "COSTADO",
         "T_SECCION",
+        "AREA_TR_M2",
         "C_CLAVEI",
         "C_CLAVEF",
         "C_RASANTEI",

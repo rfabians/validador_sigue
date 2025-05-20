@@ -22,7 +22,7 @@ class Pondaje extends ModeloValidacion {
         "CLASE",
         "IDENTIFIC",
         "FECHADATO",
-        "CONTRATO_I",
+        "CONTRATO_ID",
         "VOLUMEN_M3",
         "PROFUND_M",
       ],

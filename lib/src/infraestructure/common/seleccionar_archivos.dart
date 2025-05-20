@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart';
@@ -10,6 +9,7 @@ Future<String?> seleccionarCarpeta(BuildContext context) async {
     return carpetaSeleccionada;
   } else {
     errorMensaje(
+      // ignore: use_build_context_synchronously
       context,
       'Carga Archivos',
       'No se ha seleccionado un directorio valido',

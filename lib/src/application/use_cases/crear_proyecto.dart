@@ -7,11 +7,12 @@ import 'package:validador_sigue/src/infraestructure/common/copiar_archivos.dart'
 import 'package:validador_sigue/src/infraestructure/presentation/widgets/alerta_error.dart';
 
 Future<String> crearProyecto(BuildContext context) async {
-  String IDProyecto = Uuid().v4();
+  String idProyecto = Uuid().v4();
   final documentosPath = await getApplicationDocumentsDirectory();
-  final rutaProyecto = '${documentosPath.path}/SigueProyecto/$IDProyecto';
+  final rutaProyecto = '${documentosPath.path}/SigueProyecto/$idProyecto';
   final directorioProyecto = Directory(rutaProyecto);
   if (await directorioProyecto.exists()) {
+    // ignore: use_build_context_synchronously
     errorMensaje(context, 'Error Creación Proyecto', 'El proyecto ya existe');
   } else {
     await directorioProyecto.create(recursive: true);
@@ -24,5 +25,5 @@ Future<String> crearProyecto(BuildContext context) async {
     await copiarArchivo(databaseModelPath, databaseDestinoPath);
     await copiarArchivo(sqlMacrosCreatePath, sqlMacrosCreateDestinoPath);
   }
-  return IDProyecto;
+  return idProyecto;
 }

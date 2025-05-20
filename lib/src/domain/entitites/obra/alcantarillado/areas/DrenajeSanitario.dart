@@ -13,7 +13,7 @@ class DrenajeSanitario extends ModeloValidacion {
     return DrenajeSanitario(
       entidadSigue: 'Area Alcantarillado Drenaje Sanitario',
       dominiosCampos: {'CALIDADDATO': 'DomCalidadDatoAlc'},
-      camposNoNulos: ["CLASE", "IDENTIFIC", "FECHADATO", "CONTRATO_I"],
+      camposNoNulos: ["CLASE", "IDENTIFIC", "FECHADATO", "CONTRATO_ID"],
       camposNulos: [
         "VOLUMEN_M3",
         "RECUBRIMIE",
