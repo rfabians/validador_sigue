@@ -29,6 +29,16 @@ import 'package:validador_sigue/src/domain/entitites/obra/acueducto/nodos/punto_
 import 'package:validador_sigue/src/domain/entitites/obra/acueducto/nodos/tanque.dart';
 import 'package:validador_sigue/src/domain/entitites/obra/acueducto/nodos/valvula_control.dart';
 import 'package:validador_sigue/src/domain/entitites/obra/acueducto/nodos/valvula_sistema.dart';
+import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/areas/drenaje_pluvial.dart';
+import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/areas/drenaje_sanitario.dart';
+import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/areas/pondaje.dart';
+import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/lineas/linea_lateral/sumidero.dart';
+import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/lineas/red_local.dart';
+import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/lineas/red_troncal/canal_abierto.dart';
+import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/nodos/caja_domiciliaria.dart';
+import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/nodos/estructura_red.dart';
+import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/nodos/pozo.dart';
+import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/nodos/seccion_transversal.dart';
 
 Future<List<ErrorValidacion>> validarEntidades(
   TipoEntidadSIGUE tipoEntidadSIGUE,
@@ -36,6 +46,7 @@ Future<List<ErrorValidacion>> validarEntidades(
   CantidadEntidadSIGUE agrupacion,
   Connection conn,
 ) async {
+  List<ErrorValidacion> erroresValidacion = [];
   switch (tipoEntidadSIGUE) {
     case TipoEntidadSIGUE.nodoAcueducto:
       Map<int, ModeloValidacion Function()> asignacionClasesNodoAcueducto = {
@@ -64,7 +75,7 @@ Future<List<ErrorValidacion>> validarEntidades(
       ModeloValidacion? modelo =
           asignacionClasesNodoAcueducto[agrupacion.clase]?.call();
       if (modelo != null) {
-        await validarEntidad(modelo, agrupacion, idProyecto, conn);
+       erroresValidacion = erroresValidacion + await validarEntidad(modelo, agrupacion, idProyecto, conn);
       }
       break;
     case TipoEntidadSIGUE.lineaAcueducto:
@@ -78,34 +89,51 @@ Future<List<ErrorValidacion>> validarEntidades(
       ModeloValidacion? modelo =
           asignacionClasesLineaAcueducto[agrupacion.clase]?.call();
       if (modelo != null) {
-        await validarEntidad(modelo, agrupacion, idProyecto, conn);
+        erroresValidacion = erroresValidacion + await validarEntidad(modelo, agrupacion, idProyecto, conn);
       }
       break;
     case TipoEntidadSIGUE.nodoAlcantarillado:
      Map<int, ModeloValidacion Function()> asignacionClasesNodoAlcantarillado = {
-        1: () => RedMatriz.parametrosValidaciones(),
-        2: () => Aduccion.parametrosValidaciones(),
-        3: () => Conduccion.parametrosValidaciones(),
-        4: () => RedMenor.parametrosValidaciones(),
-        5: () => LineaLateral.parametrosValidaciones(),
+        1: () => EstructuraRed.parametrosValidaciones(),
+        2: () => Pozo.parametrosValidaciones(),
+        3: () => Sumidero.parametrosValidaciones(),
+        4: () => CajaDomiciliaria.parametrosValidaciones(),
+        5: () => Secciontransversal.parametrosValidaciones(),
       };
       ModeloValidacion? modelo =
           asignacionClasesNodoAlcantarillado[agrupacion.clase]?.call();
       if (modelo != null) {
-        await validarEntidad(modelo, agrupacion, idProyecto, conn);
+        erroresValidacion = erroresValidacion + await validarEntidad(modelo, agrupacion, idProyecto, conn);
       }
       break;
     case TipoEntidadSIGUE.lineaAlcantarillado:
-      print('AS');
+      Map<int, ModeloValidacion Function()> asignacionClasesLineaAlcantarillado = {
+        1: () => Redlocal.parametrosValidaciones(),
+        2: () => Canalabierto.parametrosValidaciones(),
+        3: () => LineaLateral.parametrosValidaciones(),
+      };
+      ModeloValidacion? modelo =
+          asignacionClasesLineaAlcantarillado[agrupacion.clase]?.call();
+      if (modelo != null) {
+        erroresValidacion = erroresValidacion + await validarEntidad(modelo, agrupacion, idProyecto, conn);
+      }
       break;
     case TipoEntidadSIGUE.areaAlcantarillado:
-      print('AS');
+      Map<int, ModeloValidacion Function()> asignacionClasesAreaAlcantarillado = {
+        1: () => Drenajepluvial.parametrosValidaciones(),
+        2: () => DrenajeSanitario.parametrosValidaciones(),
+        3: () => Pondaje.parametrosValidaciones(),
+      };
+      ModeloValidacion? modelo =
+          asignacionClasesAreaAlcantarillado[agrupacion.clase]?.call();
+      if (modelo != null) {
+        erroresValidacion = erroresValidacion + await validarEntidad(modelo, agrupacion, idProyecto, conn);
+      }
       break;
     case TipoEntidadSIGUE.noAplica:
-      print('AS');
       break;
   }
-  return [];
+  return erroresValidacion;
 }
 
 Future<List<ErrorValidacion>> validarEntidad(

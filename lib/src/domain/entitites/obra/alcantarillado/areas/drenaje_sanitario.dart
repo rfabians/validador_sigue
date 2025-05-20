@@ -22,7 +22,7 @@ class DrenajeSanitario extends ModeloValidacion {
         "ESNATURAL",
         "W",
         "PENDIENTE",
-        "IMPERMEABI",
+        "IMPERMEABILIDAD",
         "NDISENO",
       ],
       validacionesPersonalizadas: [

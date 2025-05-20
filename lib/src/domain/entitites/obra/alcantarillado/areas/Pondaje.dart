@@ -26,7 +26,7 @@ class Pondaje extends ModeloValidacion {
         "VOLUMEN_M3",
         "PROFUND_M",
       ],
-      camposNulos: ["W", "PENDIENTE", "IMPERMEABI", "NDISENO"],
+      camposNulos: ["W", "PENDIENTE", "IMPERMEABILIDAD", "NDISENO"],
       validacionesPersonalizadas: [],
     );
   }

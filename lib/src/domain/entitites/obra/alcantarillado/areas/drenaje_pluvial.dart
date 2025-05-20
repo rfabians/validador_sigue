@@ -20,7 +20,7 @@ class Drenajepluvial extends ModeloValidacion {
         "CONTRATO_ID",
         "W",
         "PENDIENTE",
-        "IMPERMEABI",
+        "IMPERMEABILIDAD",
         "NDISENO",
       ],
       camposNulos: [
