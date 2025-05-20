@@ -74,12 +74,20 @@ void asignarListaCapas(
                                 'Importando Información',
                               );
                               String idProyecto = await crearProyecto(context);
-                              await cargarInformacion(
-                                idProyecto,
-                                listaEntidadesSIGUE,
-                                context,
-                              );
-                              await validarIntegridadAtributiva(context, idProyecto, listaEntidadesSIGUE);
+                              if (context.mounted) {
+                                await cargarInformacion(
+                                  idProyecto,
+                                  listaEntidadesSIGUE,
+                                  context,
+                                );
+                              }
+                              if (context.mounted) {
+                                await validarIntegridadAtributiva(
+                                  context,
+                                  idProyecto,
+                                  listaEntidadesSIGUE,
+                                );
+                              }
                               controladorAsignacionCapas
                                   .actualizarEstadoCargaPagina(false);
                             },

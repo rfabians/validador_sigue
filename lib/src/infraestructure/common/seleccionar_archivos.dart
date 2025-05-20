@@ -1,4 +1,3 @@
-
 import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:validador_sigue/src/infraestructure/presentation/widgets/alerta_error.dart';
@@ -8,12 +7,13 @@ Future<String?> seleccionarCarpeta(BuildContext context) async {
   if (carpetaSeleccionada != null) {
     return carpetaSeleccionada;
   } else {
-    errorMensaje(
-      // ignore: use_build_context_synchronously
-      context,
-      'Carga Archivos',
-      'No se ha seleccionado un directorio valido',
-    );
+    if (context.mounted) {
+      errorMensaje(
+        context,
+        'Carga Archivos',
+        'No se ha seleccionado un directorio valido',
+      );
+    }
   }
   return null;
 }

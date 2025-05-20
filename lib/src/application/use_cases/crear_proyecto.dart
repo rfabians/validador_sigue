@@ -12,8 +12,10 @@ Future<String> crearProyecto(BuildContext context) async {
   final rutaProyecto = '${documentosPath.path}/SigueProyecto/$idProyecto';
   final directorioProyecto = Directory(rutaProyecto);
   if (await directorioProyecto.exists()) {
-    // ignore: use_build_context_synchronously
-    errorMensaje(context, 'Error Creación Proyecto', 'El proyecto ya existe');
+    if (context.mounted){
+errorMensaje(context, 'Error Creación Proyecto', 'El proyecto ya existe');
+    }
+    
   } else {
     await directorioProyecto.create(recursive: true);
     final databaseModelPath = '${documentosPath.path}/.gdal_sigue/Database.db';

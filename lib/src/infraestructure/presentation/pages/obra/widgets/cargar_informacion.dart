@@ -48,21 +48,25 @@ Widget cargarInformacion(BuildContext context) {
                               );
                           listaEntidadesSIGUE.add(entidadSIGUE);
                         }
-                        asignarListaCapas(
-                          context,
-                          'Asignar capas a entidades SIGUE',
-                          'Seleccione las capas que desea validar',
-                          listaEntidadesSIGUE,
-                          PanelValidacionObra(),
-                        );
+                        if (context.mounted) {
+                          asignarListaCapas(
+                            context,
+                            'Asignar capas a entidades SIGUE',
+                            'Seleccione las capas que desea validar',
+                            listaEntidadesSIGUE,
+                            PanelValidacionObra(),
+                          );
+                        }
                       }
                       controladorObraPagina.actualizarEstadoCargaPagina(false);
                     } else {
-                      errorMensaje(
-                        context,
-                        'Error Lectura GDB',
-                        'El Arhivo Seleccionado no es una FileGDB',
-                      );
+                      if (context.mounted) {
+                        errorMensaje(
+                          context,
+                          'Error Lectura GDB',
+                          'El Arhivo Seleccionado no es una FileGDB',
+                        );
+                      }
                     }
                   }
                 },
@@ -94,19 +98,23 @@ Widget cargarInformacion(BuildContext context) {
                     }
                   }
                   if (rutasShapesFiles.isNotEmpty) {
-                    asignarListaCapas(
-                      context,
-                      'Asignar capas a entidades SIGUE',
-                      'Seleccione las capas que desea validar',
-                      rutasShapesFiles,
-                      PanelValidacionObra(),
-                    );
+                    if (context.mounted) {
+                      asignarListaCapas(
+                        context,
+                        'Asignar capas a entidades SIGUE',
+                        'Seleccione las capas que desea validar',
+                        rutasShapesFiles,
+                        PanelValidacionObra(),
+                      );
+                    }
                   } else {
-                    errorMensaje(
-                      context,
-                      'Error Lectura ShapeFiles',
-                      'No se han seleccionado archivos Shape validos',
-                    );
+                    if (context.mounted) {
+                      errorMensaje(
+                        context,
+                        'Error Lectura ShapeFiles',
+                        'No se han seleccionado archivos Shape validos',
+                      );
+                    }
                   }
                 },
               ),

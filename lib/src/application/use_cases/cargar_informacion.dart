@@ -133,12 +133,13 @@ Future<void> cargarInformacion(
       try {
         await connectionDatabase.execute(sql);
       } catch (e) {
-        errorMensaje(
-          // ignore: use_build_context_synchronously
-          context,
-          'Error en importación',
-          'La capa ${capa.nombreCapa} no cumple con la estructura de la Norma',
-        );
+        if (context.mounted) {
+          errorMensaje(
+            context,
+            'Error en importación',
+            'La capa ${capa.nombreCapa} no cumple con la estructura de la Norma',
+          );
+        }
       }
       await connectionDatabase.execute(sql);
     }
