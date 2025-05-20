@@ -2,6 +2,7 @@ import 'package:validador_sigue/src/domain/entitites/modelo_validacion.dart';
 
 class AccesorioOtros extends ModeloValidacion {
   AccesorioOtros({
+    required super.entidadSigue,
     required super.dominiosCampos,
     required super.camposNoNulos,
     required super.validacionesPersonalizadas,
@@ -10,6 +11,7 @@ class AccesorioOtros extends ModeloValidacion {
 
   static AccesorioOtros parametrosValidaciones() {
     return AccesorioOtros(
+      entidadSigue: 'Nodo Acueducto Accesorio Otros',
       dominiosCampos: {
         'SUBTIPO': 'Dom_Subtip_AccesOtros',
         'ESTADOENRED': 'Dom_EstadoRed',

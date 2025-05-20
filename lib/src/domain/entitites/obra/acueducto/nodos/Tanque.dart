@@ -2,6 +2,7 @@ import 'package:validador_sigue/src/domain/entitites/modelo_validacion.dart';
 
 class Tanque extends ModeloValidacion {
   Tanque({
+    required super.entidadSigue,
     required super.dominiosCampos,
     required super.camposNoNulos,
     required super.validacionesPersonalizadas,
@@ -10,6 +11,7 @@ class Tanque extends ModeloValidacion {
 
   static Tanque parametrosValidaciones() {
     return Tanque(
+      entidadSigue: 'Nodo Acueducto Tanque',
       dominiosCampos: {
         'SUBTIPO': 'Dom_Subtip_Tanque',
         'ESTADOENRED': 'Dom_EstadoRed',

@@ -2,6 +2,7 @@ import 'package:validador_sigue/src/domain/entitites/modelo_validacion.dart';
 
 class ValvulaControl extends ModeloValidacion {
   ValvulaControl({
+    required super.entidadSigue,
     required super.dominiosCampos,
     required super.camposNoNulos,
     required super.validacionesPersonalizadas,
@@ -10,6 +11,7 @@ class ValvulaControl extends ModeloValidacion {
 
   static ValvulaControl parametrosValidaciones() {
     return ValvulaControl(
+      entidadSigue: 'Nodo Acueducto Valvula de Control',
       dominiosCampos: {
         'SUBTIPO': 'Dom_Subtip_ValvControl',
         'ESTADOENRED': 'Dom_EstadoRed',

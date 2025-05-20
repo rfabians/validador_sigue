@@ -2,6 +2,7 @@ import 'package:validador_sigue/src/domain/entitites/modelo_validacion.dart';
 
 class PlantaTratamiento extends ModeloValidacion {
   PlantaTratamiento({
+    required super.entidadSigue,
     required super.dominiosCampos,
     required super.camposNoNulos,
     required super.validacionesPersonalizadas,
@@ -10,6 +11,7 @@ class PlantaTratamiento extends ModeloValidacion {
 
   static PlantaTratamiento parametrosValidaciones() {
     return PlantaTratamiento(
+      entidadSigue: 'Nodo Acueducto Planta de Tratamiento',
       dominiosCampos: {
         'SUBTIPO': 'Dom_Subtip_PlanTratam',
         'ESTADOENRED': 'Dom_EstadoRed',

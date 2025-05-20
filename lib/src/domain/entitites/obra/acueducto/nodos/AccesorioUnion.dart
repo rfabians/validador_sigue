@@ -2,6 +2,7 @@ import 'package:validador_sigue/src/domain/entitites/modelo_validacion.dart';
 
 class AccesorioUnion extends ModeloValidacion {
   AccesorioUnion({
+    required super.entidadSigue,
     required super.dominiosCampos,
     required super.camposNoNulos,
     required super.validacionesPersonalizadas,
@@ -10,6 +11,7 @@ class AccesorioUnion extends ModeloValidacion {
 
   static AccesorioUnion parametrosValidaciones() {
     return AccesorioUnion(
+      entidadSigue: 'Nodo Acueducto Accesorio Union',
       dominiosCampos: {
         'SUBTIPO': 'Dom_Subtip_AccesUnion',
         'ESTADOENRED': 'Dom_EstadoRed',

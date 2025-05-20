@@ -2,6 +2,8 @@ import 'package:validador_sigue/src/domain/entitites/modelo_validacion.dart';
 
 class Hidrante extends ModeloValidacion {
   Hidrante({
+
+    required super.entidadSigue,
     required super.dominiosCampos,
     required super.camposNoNulos,
     required super.validacionesPersonalizadas,
@@ -10,6 +12,7 @@ class Hidrante extends ModeloValidacion {
 
   static Hidrante parametrosValidaciones() {
     return Hidrante(
+      entidadSigue: 'Hidrante',
       dominiosCampos: {
         'SUBTIPO': 'Dom_Subtip_Hidrante',
         'ESTADOENRED': 'Dom_EstadoRed',

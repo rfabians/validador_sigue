@@ -2,6 +2,7 @@ import 'package:validador_sigue/src/domain/entitites/modelo_validacion.dart';
 
 class InstrumentosDeMedicion extends ModeloValidacion {
   InstrumentosDeMedicion({
+    required super.entidadSigue,
     required super.dominiosCampos,
     required super.camposNoNulos,
     required super.validacionesPersonalizadas,
@@ -10,6 +11,7 @@ class InstrumentosDeMedicion extends ModeloValidacion {
 
   static InstrumentosDeMedicion parametrosValidaciones() {
     return InstrumentosDeMedicion(
+      entidadSigue: 'Nodo Acueducto Instrumentos de Medición',
       dominiosCampos: {
         'SUBTIPO': 'Dom_Subtip_InsMedicion',
         'ESTADOENRED': 'Dom_EstadoRed',

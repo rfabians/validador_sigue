@@ -2,6 +2,7 @@ import 'package:validador_sigue/src/domain/entitites/modelo_validacion.dart';
 
 class Desarenador extends ModeloValidacion {
   Desarenador({
+    required super.entidadSigue,
     required super.dominiosCampos,
     required super.camposNoNulos,
     required super.validacionesPersonalizadas,
@@ -10,6 +11,7 @@ class Desarenador extends ModeloValidacion {
 
   static Desarenador parametrosValidaciones() {
     return Desarenador(
+      entidadSigue: 'Nodo Acueducto Desarenador',
       dominiosCampos: {
         'SUBTIPO': 'Dom_Subtip_Desaren',
         'ESTADOENRED': 'Dom_EstadoRed',

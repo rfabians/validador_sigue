@@ -2,6 +2,7 @@ import 'package:validador_sigue/src/domain/entitites/modelo_validacion.dart';
 
 class EstacionBombeo extends ModeloValidacion {
   EstacionBombeo({
+    required super.entidadSigue,
     required super.dominiosCampos,
     required super.camposNoNulos,
     required super.validacionesPersonalizadas,
@@ -10,6 +11,7 @@ class EstacionBombeo extends ModeloValidacion {
 
   static EstacionBombeo parametrosValidaciones() {
     return EstacionBombeo(
+      entidadSigue: 'Nodo Acueducto Estación de Bombeo',
       dominiosCampos: {
         'SUBTIPO': 'Dom_Subtip_EstacBom',
         'ESTADOENRED': 'Dom_EstadoRed',

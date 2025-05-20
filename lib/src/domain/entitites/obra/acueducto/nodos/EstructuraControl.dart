@@ -2,6 +2,7 @@ import 'package:validador_sigue/src/domain/entitites/modelo_validacion.dart';
 
 class EstructuraControl extends ModeloValidacion {
   EstructuraControl({
+    required super.entidadSigue,
     required super.dominiosCampos,
     required super.camposNoNulos,
     required super.validacionesPersonalizadas,
@@ -10,6 +11,7 @@ class EstructuraControl extends ModeloValidacion {
 
   static EstructuraControl parametrosValidaciones() {
     return EstructuraControl(
+      entidadSigue: 'Nodo Acueducto Estructura de Control',
       dominiosCampos: {
         'SUBTIPO': 'Dom_Subtip_EstrucCont',
         'ESTADOENRED': 'Dom_EstadoRed',

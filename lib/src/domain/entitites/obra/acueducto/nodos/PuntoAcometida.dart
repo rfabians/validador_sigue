@@ -2,6 +2,7 @@ import 'package:validador_sigue/src/domain/entitites/modelo_validacion.dart';
 
 class PuntoAcometida extends ModeloValidacion {
   PuntoAcometida({
+    required super.entidadSigue,
     required super.dominiosCampos,
     required super.camposNoNulos,
     required super.validacionesPersonalizadas,
@@ -10,6 +11,7 @@ class PuntoAcometida extends ModeloValidacion {
 
   static PuntoAcometida parametrosValidaciones() {
     return PuntoAcometida(
+      entidadSigue: 'Nodo Acueducto Punto Acometida',
       dominiosCampos: {
         'SUBTIPO': 'Dom_Subtip_PtoAcom',
         'ESTADOENRED': 'Dom_EstadoRed',

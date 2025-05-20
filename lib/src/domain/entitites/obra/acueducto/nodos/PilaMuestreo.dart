@@ -2,6 +2,7 @@ import 'package:validador_sigue/src/domain/entitites/modelo_validacion.dart';
 
 class Macromedidor extends ModeloValidacion {
   Macromedidor({
+    required super.entidadSigue,
     required super.dominiosCampos,
     required super.camposNoNulos,
     required super.validacionesPersonalizadas,
@@ -10,6 +11,7 @@ class Macromedidor extends ModeloValidacion {
 
   static Macromedidor parametrosValidaciones() {
     return Macromedidor(
+      entidadSigue: 'Nodo Acueducto Pila Muestreo',
       dominiosCampos: {
         'SUBTIPO': 'Dom_Subtip_PilaMuest',
         'ESTADOENRED': 'Dom_EstadoRed',

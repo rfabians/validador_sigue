@@ -3,12 +3,14 @@ abstract class ModeloValidacion {
   List<String> camposNoNulos;
   List<String> validacionesPersonalizadas;
   List<String> camposNulos = [];
+  String entidadSigue;
 
   ModeloValidacion({
     required this.dominiosCampos,
     required this.camposNoNulos,
     required this.validacionesPersonalizadas,
     required this.camposNulos,
+    required this.entidadSigue
   });
 
   static ModeloValidacion parametrosValidaciones() {
@@ -16,4 +18,7 @@ abstract class ModeloValidacion {
       'parametrosValidaciones() must be implemented in a subclass',
     );
   }
+
+
+
 }

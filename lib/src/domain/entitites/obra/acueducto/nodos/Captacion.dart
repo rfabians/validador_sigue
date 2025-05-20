@@ -2,6 +2,7 @@ import 'package:validador_sigue/src/domain/entitites/modelo_validacion.dart';
 
 class Captacion extends ModeloValidacion {
   Captacion({
+    required super.entidadSigue,
     required super.dominiosCampos,
     required super.camposNoNulos,
     required super.validacionesPersonalizadas,
@@ -10,6 +11,7 @@ class Captacion extends ModeloValidacion {
 
   static Captacion parametrosValidaciones() {
     return Captacion(
+      entidadSigue: 'Nodo Acueducto Captación',
       dominiosCampos: {
         'SUBTIPO': 'Dom_Subtip_Captac',
         'ESTADOENRED': 'Dom_EstadoRed',

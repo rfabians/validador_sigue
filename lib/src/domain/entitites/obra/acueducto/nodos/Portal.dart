@@ -2,6 +2,7 @@ import 'package:validador_sigue/src/domain/entitites/modelo_validacion.dart';
 
 class Portal extends ModeloValidacion {
   Portal({
+    required super.entidadSigue,
     required super.dominiosCampos,
     required super.camposNoNulos,
     required super.validacionesPersonalizadas,
@@ -10,6 +11,7 @@ class Portal extends ModeloValidacion {
 
   static Portal parametrosValidaciones() {
     return Portal(
+      entidadSigue: 'Nodo Acueducto Portal',
       dominiosCampos: {
         'SUBTIPO': 'Dom_Subtip_Portal',
         'ESTADOENRED': 'Dom_EstadoRed',

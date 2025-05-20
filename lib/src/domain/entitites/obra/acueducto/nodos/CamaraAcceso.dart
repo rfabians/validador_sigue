@@ -2,6 +2,7 @@ import 'package:validador_sigue/src/domain/entitites/modelo_validacion.dart';
 
 class CamaraAcceso extends ModeloValidacion {
   CamaraAcceso({
+    required super.entidadSigue,
     required super.dominiosCampos,
     required super.camposNoNulos,
     required super.validacionesPersonalizadas,
@@ -10,6 +11,7 @@ class CamaraAcceso extends ModeloValidacion {
 
   static CamaraAcceso parametrosValidaciones() {
     return CamaraAcceso(
+      entidadSigue: 'Nodo Acueducto Camara de Acceso',
       dominiosCampos: {
         'SUBTIPO': 'Dom_Subtip_AccesUnion',
         'ESTADOENRED': 'Dom_EstadoRed',

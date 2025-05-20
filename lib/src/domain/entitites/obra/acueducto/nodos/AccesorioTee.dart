@@ -2,6 +2,7 @@ import 'package:validador_sigue/src/domain/entitites/modelo_validacion.dart';
 
 class AccesorioTee extends ModeloValidacion {
   AccesorioTee({
+    required super.entidadSigue,
     required super.dominiosCampos,
     required super.camposNoNulos,
     required super.validacionesPersonalizadas,
@@ -10,6 +11,7 @@ class AccesorioTee extends ModeloValidacion {
 
   static AccesorioTee parametrosValidaciones() {
     return AccesorioTee(
+      entidadSigue: 'Nodo Acueducto Accesorio Tee',
       dominiosCampos: {
         'SUBTIPO': 'Dom_Subtip_AccesTee',
         'ESTADOENRED': 'Dom_EstadoRed',
