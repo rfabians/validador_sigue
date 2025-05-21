@@ -12,6 +12,7 @@ Future<List<ErrorValidacion>> validarIntegridadAtributiva(
   String idProyecto,
   List<RepositorioEntidadSIGUE> entidadesSIGUE,
 ) async {
+  List<ErrorValidacion> erroresValidacion = [];
   final documentosPath = await getApplicationDocumentsDirectory();
   final databasePath =
       '${documentosPath.path}/SigueProyecto/$idProyecto/Database.db';
@@ -38,16 +39,18 @@ Future<List<ErrorValidacion>> validarIntegridadAtributiva(
       }
 
       for (CantidadEntidadSIGUE cantidad in cantidades) {
-        await validarEntidades(
-          entidadSIGUE.tipoEntidadSIGUE,
-          idProyecto,
-          cantidad,
-          conn
-        );
+        erroresValidacion =
+            erroresValidacion +
+            await validarEntidades(
+              entidadSIGUE.tipoEntidadSIGUE,
+              idProyecto,
+              cantidad,
+              conn,
+            );
       }
     }
   }
-  return [];
+  return erroresValidacion;
 }
 
 String tablaEntidad(RepositorioEntidadSIGUE entidad) {

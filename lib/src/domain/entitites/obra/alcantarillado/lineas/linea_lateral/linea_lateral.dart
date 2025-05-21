@@ -40,7 +40,7 @@ class Linealateral extends ModeloValidacion {
         "CAM_CAIDA",
         "INSTALACI",
         "MATESPPUBL",
-        "PROFUNDIDA",
+        "PROFUNDIDAD",
         "PENDIENTE",
         "NOMBRE",
         "NROCONDUCTOS",

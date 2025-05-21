@@ -32,13 +32,14 @@ import 'package:validador_sigue/src/domain/entitites/obra/acueducto/nodos/valvul
 import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/areas/drenaje_pluvial.dart';
 import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/areas/drenaje_sanitario.dart';
 import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/areas/pondaje.dart';
-import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/lineas/linea_lateral/sumidero.dart';
+import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/lineas/linea_lateral/linea_lateral.dart';
 import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/lineas/red_local.dart';
 import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/lineas/red_troncal/canal_abierto.dart';
 import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/nodos/caja_domiciliaria.dart';
 import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/nodos/estructura_red.dart';
 import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/nodos/pozo.dart';
 import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/nodos/seccion_transversal.dart';
+import 'package:validador_sigue/src/domain/entitites/obra/alcantarillado/nodos/sumidero.dart';
 
 Future<List<ErrorValidacion>> validarEntidades(
   TipoEntidadSIGUE tipoEntidadSIGUE,
@@ -84,7 +85,7 @@ Future<List<ErrorValidacion>> validarEntidades(
         2: () => Aduccion.parametrosValidaciones(),
         3: () => Conduccion.parametrosValidaciones(),
         4: () => RedMenor.parametrosValidaciones(),
-        5: () => LineaLateral.parametrosValidaciones(),
+        5: () => LineaLateralAcueducto.parametrosValidaciones(),
       };
       ModeloValidacion? modelo =
           asignacionClasesLineaAcueducto[agrupacion.clase]?.call();
@@ -110,7 +111,7 @@ Future<List<ErrorValidacion>> validarEntidades(
       Map<int, ModeloValidacion Function()> asignacionClasesLineaAlcantarillado = {
         1: () => Redlocal.parametrosValidaciones(),
         2: () => Canalabierto.parametrosValidaciones(),
-        3: () => LineaLateral.parametrosValidaciones(),
+        3: () => Linealateral.parametrosValidaciones(),
       };
       ModeloValidacion? modelo =
           asignacionClasesLineaAlcantarillado[agrupacion.clase]?.call();

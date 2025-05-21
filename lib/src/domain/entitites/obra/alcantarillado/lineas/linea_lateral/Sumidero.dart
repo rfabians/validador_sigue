@@ -1,7 +1,7 @@
 import 'package:validador_sigue/src/domain/entitites/modelo_validacion.dart';
 
-class Sumidero extends ModeloValidacion {
-  Sumidero({
+class SumideroLineaLateral extends ModeloValidacion {
+  SumideroLineaLateral({
     required super.entidadSigue,
     required super.dominiosCampos,
     required super.camposNoNulos,
@@ -9,8 +9,8 @@ class Sumidero extends ModeloValidacion {
     required super.camposNulos,
   });
 
-  static Sumidero parametrosValidaciones() {
-    return Sumidero(
+  static SumideroLineaLateral parametrosValidaciones() {
+    return SumideroLineaLateral(
       entidadSigue: 'Línea Alcantarillado Sumidero',
       dominiosCampos: {
         'SISTEMA': 'DomTipoSistAlc',
@@ -39,7 +39,7 @@ class Sumidero extends ModeloValidacion {
         "CAM_CAIDA",
         "INSTALACI",
         "MATESPPUBL",
-        "PROFUNDIDA",
+        "PROFUNDIDAD",
         "PENDIENTE",
         "NOMBRE",
         "NROCONDUCTOS",

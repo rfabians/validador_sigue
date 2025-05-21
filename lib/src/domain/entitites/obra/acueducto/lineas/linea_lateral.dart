@@ -1,7 +1,7 @@
 import 'package:validador_sigue/src/domain/entitites/modelo_validacion.dart';
 
-class LineaLateral extends ModeloValidacion {
-  LineaLateral({
+class LineaLateralAcueducto extends ModeloValidacion {
+  LineaLateralAcueducto({
     required super.entidadSigue,
     required super.dominiosCampos,
     required super.camposNoNulos,
@@ -9,8 +9,8 @@ class LineaLateral extends ModeloValidacion {
     required super.camposNulos,
   });
 
-  static LineaLateral parametrosValidaciones() {
-    return LineaLateral(
+  static LineaLateralAcueducto parametrosValidaciones() {
+    return LineaLateralAcueducto(
       entidadSigue: 'Acueducto Líneas Línea Lateral',
       dominiosCampos: {
         'SUBTIPO': 'Dom_Subtip_LinLateral_Acue',

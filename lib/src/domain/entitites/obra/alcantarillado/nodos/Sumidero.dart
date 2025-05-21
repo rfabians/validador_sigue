@@ -21,7 +21,7 @@ class Sumidero extends ModeloValidacion {
         'ESTOPERA': 'DomEstadoOper',
         'TIPOINSPEC': 'DomTipoInspecc',
         'ESTREJILLA': 'DomEstadoRejilla',
-        'MATREJILLA': 'DomMateRejill',
+        'MATREJILLA': 'DomMateRejill'
       },
       camposNoNulos: [
         "IDENTIFIC",

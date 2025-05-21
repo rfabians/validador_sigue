@@ -40,7 +40,7 @@ class Canalabierto extends ModeloValidacion {
         "C_BATEAF",
         "C_RASATEI",
         "C_RASANTEF",
-        "PROFUNDIDA",
+        "PROFUNDIDAD",
         "PENDIENTE",
         "NROCONDUCTOS",
         "BASE",
